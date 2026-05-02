@@ -4,6 +4,10 @@ Serve any Rails HTML view as Markdown : no templates to write.
 
 When a client requests `text/markdown` (via `Accept` header or `.md` extension), mark-don intercepts the normal HTML render, converts the output on the fly, and returns it with `Content-Type: text/markdown`. Your existing `.html.erb` views are reused as-is.
 
+## Background
+
+Inspired by [this Evil Martians article](https://evilmartians.com/chronicles/how-to-make-your-website-visible-to-llms) on making Rails apps visible to LLMs. The `.md` routes technique they describe is exactly what this gem automates.
+
 ## Installation
 
 Add to your Gemfile:
