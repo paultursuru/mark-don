@@ -1,6 +1,6 @@
 # mark-don
 
-Serve any Rails HTML view as Markdown — no templates to write.
+Serve any Rails HTML view as Markdown : no templates to write.
 
 When a client requests `text/markdown` (via `Accept` header or `.md` extension), mark-don intercepts the normal HTML render, converts the output on the fly, and returns it with `Content-Type: text/markdown`. Your existing `.html.erb` views are reused as-is.
 
