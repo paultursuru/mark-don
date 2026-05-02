@@ -40,6 +40,8 @@ GET /rooms/1.md
 GET /rooms/1        # with Accept: text/markdown
 ```
 
+> **Note:** the `.md` extension only works if your routes allow format suffixes. Rails disables them by default in newer apps. Either add `format: true` to the route, or use the `Accept` header instead.
+
 ### Controller macro
 
 To enable markdown for multiple actions without repeating `format.markdown` everywhere:
@@ -54,7 +56,7 @@ end
 
 ## Output
 
-The gem converts the `<body>` content of the rendered HTML to GitHub Flavored Markdown using [reverse_markdown](https://github.com/xijo/reverse_markdown) under the hood. `<script>`, `<style>`, `<meta>`, and `<link>` tags are stripped. Inline styles and unknown elements are dropped; their text content is preserved.
+The gem converts the `<body>` content of the rendered HTML to GitHub Flavored Markdown using [reverse_markdown](https://github.com/xijo/reverse_markdown) under the hood. Only the body is converted — the layout's `<head>` and surrounding HTML are discarded. `<script>`, `<style>`, `<meta>`, and `<link>` tags are stripped. Inline styles and unknown elements are dropped; their text content is preserved.
 
 **Input:**
 ```html
