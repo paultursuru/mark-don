@@ -10,7 +10,7 @@ module MarkDon
     # method_missing (which recurses infinitely when the MIME symbol is :md but
     # the called method is :markdown).
     initializer 'mark_don.mime_type' do
-      Mime::Type.register 'text/markdown', :markdown unless Mime[:md] || Mime[:markdown]
+      Mime::Type.register 'text/markdown', :markdown, [], ['md'] unless Mime[:md] || Mime[:markdown]
 
       unless ActionController::MimeResponds::Collector.method_defined?(:markdown)
         ActionController::MimeResponds::Collector.class_eval do
