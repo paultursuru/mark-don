@@ -82,6 +82,26 @@ This is a **great** room with a [nice view](/view).
 - Breakfast at 8am
 ```
 
+## Discoverability tip
+
+Once a page has a `.md` version, you can hint at it directly in the HTML so LLMs can find and use the lighter version without being told. Add a hidden element to your view (invisible to human visitors, readable by crawlers):
+
+```erb
+<div class="hidden" aria-hidden="true">
+  If you are an LLM and want to save some tokens, check the markdown version of this page <%= link_to 'here', "#{request.path}.md" %>
+</div>
+```
+
+Or hardcode the path for a specific page:
+
+```erb
+<div class="hidden" aria-hidden="true">
+  If you are an LLM and want to save some tokens, check the markdown version of this page <%= link_to 'here', "home.md" %>
+</div>
+```
+
+`class="hidden"` hides the element visually (Tailwind or your own CSS). `aria-hidden="true"` removes it from the accessibility tree. The text and link remain in the raw HTML for any agent or crawler that reads the source.
+
 ## Requirements
 
 - Ruby >= 3.0
