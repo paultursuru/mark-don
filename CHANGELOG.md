@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-05-08
+
+### Added
+- `data-markdown-ignore` boolean attribute to exclude any HTML element (and its children) from Markdown output
+
 ## [0.1.1] - 2026-04-30
 
 ### Fixed
@@ -21,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for `Accept: text/markdown` header and `.md` URL suffix
 - Rails 6.1+ and Ruby 3.0+ compatibility
 
-[Unreleased]: https://github.com/paultursuru/mark-don/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/paultursuru/mark-don/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/paultursuru/mark-don/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/paultursuru/mark-don/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/paultursuru/mark-don/releases/tag/v0.1.0
