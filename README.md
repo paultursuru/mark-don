@@ -64,7 +64,7 @@ end
 
 ## Output
 
-The gem converts the `<body>` content of the rendered HTML to GitHub Flavored Markdown using [reverse_markdown](https://github.com/xijo/reverse_markdown) under the hood. Only the body is converted — the layout's `<head>` and surrounding HTML are discarded. `<script>`, `<style>`, `<meta>`, and `<link>` tags are stripped. Inline styles and unknown elements are dropped; their text content is preserved.
+The gem converts the HTML to GitHub Flavored Markdown using [reverse_markdown](https://github.com/xijo/reverse_markdown) under the hood. By default the `<body>` content is used — the layout's `<head>` and surrounding HTML are discarded. `<script>`, `<style>`, `<meta>`, and `<link>` tags are stripped. Inline styles and unknown elements are dropped; their text content is preserved.
 
 **Input:**
 ```html
@@ -86,21 +86,67 @@ This is a **great** room with a [nice view](/view).
 - Breakfast at 8am
 ```
 
-### Excluding elements
+### Controlling what gets converted
 
-Add `data-markdown-ignore` to any HTML element to exclude it and its children from the Markdown output:
+Two HTML attributes let you control the conversion scope. They can be used independently or combined.
+
+**`data-markdown-main`** — scopes conversion to a single element. Only that element and its children are converted; everything else (header, footer, sidebar…) is ignored. Works on any tag, not just `<main>`.
+
+**`data-markdown-ignore`** — excludes an element and its children from the output, wherever they appear.
+
+#### No attributes (default)
+
+The entire `<body>` is converted:
+
+```erb
+<header>Always included</header>
+<main><h1>Content</h1></main>
+<footer>Also included</footer>
+```
+
+#### `data-markdown-main` only
+
+Restricts conversion to one element:
+
+```erb
+<header>Ignored</header>
+
+<main data-markdown-main>
+  <h1>My Room</h1>
+  <p>Only this will appear in the Markdown response.</p>
+</main>
+
+<footer>Ignored</footer>
+```
+
+#### `data-markdown-ignore` only
+
+Converts the full body but removes specific blocks:
 
 ```erb
 <nav data-markdown-ignore>
   <%= link_to "Login", login_path %>
-  <%= link_to "Sign up", signup_path %>
 </nav>
 
 <h1>My Room</h1>
 <p>Visible content.</p>
 ```
 
-The `<nav>` block is removed before conversion — only the visible content remains in the Markdown response.
+#### Both combined
+
+Scopes to a root element and removes specific children within it:
+
+```erb
+<header>Ignored</header>
+
+<main data-markdown-main>
+  <h1>My Room</h1>
+  <aside data-markdown-ignore>Related links</aside>
+  <p>This appears, the aside does not.</p>
+</main>
+
+<footer>Ignored</footer>
+```
 
 ## Discoverability tip
 

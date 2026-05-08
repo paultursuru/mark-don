@@ -66,6 +66,52 @@ RSpec.describe MarkDon::Converter do
       expect(result).not_to include('<style>')
     end
 
+    it 'uses data-markdown-main element as root instead of body' do
+      html = <<~HTML
+        <html>
+          <body>
+            <header><nav>Nav</nav></header>
+            <main data-markdown-main><h1>Content</h1><p>Only this.</p></main>
+            <footer>Footer</footer>
+          </body>
+        </html>
+      HTML
+      result = described_class.convert(html)
+      expect(result).to include('# Content')
+      expect(result).to include('Only this.')
+      expect(result).not_to include('Nav')
+      expect(result).not_to include('Footer')
+    end
+
+    it 'works with data-markdown-main on any element, not just main tag' do
+      html = '<header>Skip</header><article data-markdown-main><p>Keep</p></article><footer>Skip</footer>'
+      result = described_class.convert(html)
+      expect(result).to eq('Keep')
+      expect(result).not_to include('Skip')
+    end
+
+    it 'falls back to body when no data-markdown-main is present' do
+      html = '<header>Header</header><main><h1>Content</h1></main><footer>Footer</footer>'
+      result = described_class.convert(html)
+      expect(result).to include('# Content')
+      expect(result).to include('Header')
+      expect(result).to include('Footer')
+    end
+
+    it 'applies data-markdown-ignore inside data-markdown-main' do
+      html = <<~HTML
+        <header>Skip</header>
+        <main data-markdown-main>
+          <h1>Title</h1>
+          <nav data-markdown-ignore>Nav</nav>
+        </main>
+      HTML
+      result = described_class.convert(html)
+      expect(result).to include('# Title')
+      expect(result).not_to include('Nav')
+      expect(result).not_to include('Skip')
+    end
+
     it 'extracts only body content from a full HTML document' do
       html = <<~HTML
         <html>

@@ -10,8 +10,8 @@ module MarkDon
       STRIP_TAGS.each { |tag| doc.css(tag).remove }
       doc.css('[data-markdown-ignore]').remove
 
-      body = doc.at('body') || doc
-      ReverseMarkdown.convert(body.inner_html, unknown_tags: :bypass, github_flavored: true).strip
+      root = doc.at('[data-markdown-main]') || doc.at('body') || doc
+      ReverseMarkdown.convert(root.inner_html, unknown_tags: :bypass, github_flavored: true).strip
     end
   end
 end
