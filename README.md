@@ -86,6 +86,22 @@ This is a **great** room with a [nice view](/view).
 - Breakfast at 8am
 ```
 
+### Excluding elements
+
+Add `data-markdown-ignore` to any HTML element to exclude it and its children from the Markdown output:
+
+```erb
+<nav data-markdown-ignore>
+  <%= link_to "Login", login_path %>
+  <%= link_to "Sign up", signup_path %>
+</nav>
+
+<h1>My Room</h1>
+<p>Visible content.</p>
+```
+
+The `<nav>` block is removed before conversion — only the visible content remains in the Markdown response.
+
 ## Discoverability tip
 
 Once a page has a `.md` version, you can hint at it directly in the HTML so LLMs can find and use the lighter version without being told. Add a hidden element to your view (invisible to human visitors, readable by crawlers):

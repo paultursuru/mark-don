@@ -45,6 +45,20 @@ RSpec.describe MarkDon::Converter do
       expect(result).not_to include('<script>')
     end
 
+    it 'ignores elements with data-markdown-ignore attribute' do
+      html = '<p>Visible</p><nav data-markdown-ignore><a href="/login">Login</a></nav>'
+      result = described_class.convert(html)
+      expect(result).to eq('Visible')
+      expect(result).not_to include('Login')
+    end
+
+    it 'ignores nested content inside data-markdown-ignore' do
+      html = '<h1>Title</h1><div data-markdown-ignore><p>Hidden</p><ul><li>Also hidden</li></ul></div>'
+      result = described_class.convert(html)
+      expect(result).to eq('# Title')
+      expect(result).not_to include('Hidden')
+    end
+
     it 'strips style tags and their content' do
       html = '<style>body { color: red; }</style><p>Hello</p>'
       result = described_class.convert(html)
