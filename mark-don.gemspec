@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.homepage    = 'https://github.com/paultursuru/mark-don'
   spec.license     = 'MIT'
 
-  spec.required_ruby_version = '>= 3.2'
+  spec.required_ruby_version = '>= 3.0'
 
   spec.files         = Dir['lib/**/*', '*.gemspec', 'Gemfile', 'README.md', 'LICENSE']
   spec.require_paths = ['lib']
