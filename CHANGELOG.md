@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-05-08
+
+### Added
+- `data-markdown-main` attribute to scope Markdown conversion to a specific element, ignoring the rest of the page (header, footer, etc.). Can be used alone, combined with `data-markdown-ignore`, or omitted to keep the default `<body>` behaviour
+
 ## [0.1.2] - 2026-05-08
 
 ### Added
@@ -26,7 +31,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for `Accept: text/markdown` header and `.md` URL suffix
 - Rails 6.1+ and Ruby 3.0+ compatibility
 
-[Unreleased]: https://github.com/paultursuru/mark-don/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/paultursuru/mark-don/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/paultursuru/mark-don/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/paultursuru/mark-don/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/paultursuru/mark-don/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/paultursuru/mark-don/releases/tag/v0.1.0
