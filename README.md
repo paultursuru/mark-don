@@ -1,5 +1,9 @@
 # mark-don
 
+[![CI](https://github.com/paultursuru/mark-don/actions/workflows/ci.yml/badge.svg)](https://github.com/paultursuru/mark-don/actions/workflows/ci.yml)
+[![Gem Version](https://badge.fury.io/rb/mark-don.svg)](https://badge.fury.io/rb/mark-don)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Serve any Rails HTML view as Markdown : no templates to write.
 
 When a client requests `text/markdown` (via `Accept` header or `.md` extension), mark-don intercepts the normal HTML render, converts the output on the fly, and returns it with `Content-Type: text/markdown`. Your existing `.html.erb` views are reused as-is.
